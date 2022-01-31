@@ -1,0 +1,389 @@
+What is a Database?
+Database is a collection of organised data. The data could be of any type example string, integer, float etc.
+
+What is Relational Database?
+The database in which data is stored in tabular form then it's called relational database.
+
+What is SQL(structured query langauge)?
+SQL is a langauge which is used to interact with Relational Database. We can create Database, Manage Database, Store user's information and many more.
+
+What is PHP myAdmin?
+PHP myAdmin is a free software written in PHP and it is used to handle the administration of  mysql or maria db.
+
+---------------------------------------------------------------
+
+1. Install Xampp in your operating system. Once it is installed, open it and enable phpmyadmin and mysql database.
+
+2. Enter cmd in sql folder by running this command in your cmd
+                    cd../..
+---------------------------------------------------------------
+
+3. Once you are done run this command to get into bin folder.
+               cd xampp/mysql/bin
+---------------------------------------------------------------
+
+4. To enter into SQL database run the following command. Then it will ask you password, don't do anything just press enter.
+             mysql -u root -p -h localhost
+---------------------------------------------------------------
+
+5. Now you are inside your Database.
+
+6. You can run the following command to see all databases.
+                show databases;
+---------------------------------------------------------------
+
+7. You can now create databases with the help of the command.
+                create database;
+---------------------------------------------------------------
+
+8. To enter in a database, simply run the command.
+          use database <databases name>;
+---------------------------------------------------------------
+
+9. To start your work in the database, run the command.
+                select database();
+---------------------------------------------------------------
+
+10. Now you can enter the data in database.
+
+11. To create a table in database, use the command.
+              create table <table name>;
+---------------------------------------------------------------
+
+12. Further syntax is:
+       create table students(name varchar(70), age int);
+---------------------------------------------------------------
+
+13. To see the columns of table, use the following command.
+       show columns from <database name>;
+--------------------------------------------------------------
+
+14.To insert a data in table, we have the command.
+       insert into <table name>(name,age)values('shubham',18);
+---------------------------------------------------------------
+
+15. To set something as a default value use the syntax.
+    create table <table name>(name varchar(34) not null default 'name not given',age int not null default 0)
+---------------------------------------------------------------
+
+    Now if anyone do not enter name, then as a default, 'name not given' will be displayed. Similarly if someone do not enter the age then by default 0 will be displayed.
+
+16. Add more columns to existing table, use the following commands.
+     alter table <table name> add <column name> <column datatype example varchar, int etc>
+----------------------------------------------------------------
+
+17. To make column a primary key use the following command.
+      create table <table name>(name varchar(10), age int,primary key(name));
+
+18. We can use 'where' clause to find the particular data.
+       select * from <table name> where <condition>;
+   Ex: select * from students where age=18;
+----------------------------------------------------------------
+
+19. To update the table we can use the command.
+       update students set age=45 where name='shubham'
+-----------------------------------------------------------------
+
+20. Insert elements into an existing table.
+       insert into <table name>(column1,column2) values(value1,value2, etc);
+    Ex: insert into students(name,age) values('shubham',18);
+
+21. If we do not remember the element in table, then we can use like attribute to find it.
+       select <column name> from <table name> where <column name> like '%<element which you remember>%'
+    Ex: select name from students where name like '%bham%';
+-------------------------------------------------------------------
+
+22. Further we have not equal to operator in sql.
+       select * from <table name> where <column name> !=<condition>;
+    Ex: select * from students where age != 18;
+
+
+--------------------------------------------------------------------
+
+
+
+One example is given below for better understanding :)
+
+
+
+Microsoft Windows [Version 10.0.19042.1466]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Subham>cd../..
+
+C:\> cd xampp/mysql/bin
+
+C:\xampp\mysql\bin>mysql -u root -p -h localhost
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| sqltutorial        |
+| test               |
++--------------------+
+6 rows in set (0.015 sec)
+
+MariaDB [(none)]> use sqltutorial;
+Database changed
+MariaDB [sqltutorial]> select database();
++-------------+
+| database()  |
++-------------+
+| sqltutorial |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [sqltutorial]> show tables;
++-----------------------+
+| Tables_in_sqltutorial |
++-----------------------+
+| defaultone            |
+| students              |
+| usernameandpassword   |
++-----------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [sqltutorial]> select * from students;
++---------+------+--------+---------+
+| name    | age  | school | address |
++---------+------+--------+---------+
+| shubham |   18 | NULL   | NULL    |
+| aditya  |   45 | NULL   | NULL    |
++---------+------+--------+---------+
+2 rows in set (0.055 sec)
+
+MariaDB [sqltutorial]> desc students;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(70) | YES  |     | NULL    |       |
+| age     | int(11)     | YES  |     | NULL    |       |
+| school  | varchar(45) | YES  |     | NULL    |       |
+| address | varchar(45) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.029 sec)
+
+MariaDB [sqltutorial]> show tables;
++-----------------------+
+| Tables_in_sqltutorial |
++-----------------------+
+| defaultone            |
+| students              |
+| usernameandpassword   |
++-----------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [sqltutorial]> desc defaultone;
++-------+-------------+------+-----+-----------+-------+
+| Field | Type        | Null | Key | Default   | Extra |
++-------+-------------+------+-----+-----------+-------+
+| name  | varchar(23) | NO   |     | not given |       |
++-------+-------------+------+-----+-----------+-------+
+1 row in set (0.038 sec)
+
+MariaDB [sqltutorial]> select * from defaultone;
++-----------+
+| name      |
++-----------+
+| shubham   |
+|           |
+| not given |
++-----------+
+3 rows in set (0.001 sec)
+
+MariaDB [sqltutorial]> show tables;
++-----------------------+
+| Tables_in_sqltutorial |
++-----------------------+
+| defaultone            |
+| students              |
+| usernameandpassword   |
++-----------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [sqltutorial]> select * from students;
++---------+------+--------+---------+
+| name    | age  | school | address |
++---------+------+--------+---------+
+| shubham |   18 | NULL   | NULL    |
+| aditya  |   45 | NULL   | NULL    |
++---------+------+--------+---------+
+2 rows in set (0.001 sec)
+
+MariaDB [sqltutorial]> select * from students where age=18;
++---------+------+--------+---------+
+| name    | age  | school | address |
++---------+------+--------+---------+
+| shubham |   18 | NULL   | NULL    |
++---------+------+--------+---------+
+1 row in set (0.033 sec)
+
+MariaDB [sqltutorial]> select * from students where age=67;
+Empty set (0.001 sec)
+
+MariaDB [sqltutorial]> select * from defaultone;
++-----------+
+| name      |
++-----------+
+| shubham   |
+|           |
+| not given |
++-----------+
+3 rows in set (0.001 sec)
+
+MariaDB [sqltutorial]> select * from usernameandpassword;
++------------+------------+
+| username   | password   |
++------------+------------+
+| shubham ma | shubham124 |
+| aditya     | 24324      |
+| rohit      |            |
++------------+------------+
+3 rows in set (0.012 sec)
+
+MariaDB [sqltutorial]> update students set age=45 where name="shubham";
+Query OK, 1 row affected (0.091 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [sqltutorial]> select * from students;
++---------+------+--------+---------+
+| name    | age  | school | address |
++---------+------+--------+---------+
+| shubham |   45 | NULL   | NULL    |
+| aditya  |   45 | NULL   | NULL    |
++---------+------+--------+---------+
+2 rows in set (0.001 sec)
+
+MariaDB [sqltutorial]> select * from students where name = "aditya";
++--------+------+--------+---------+
+| name   | age  | school | address |
++--------+------+--------+---------+
+| aditya |   45 | NULL   | NULL    |
++--------+------+--------+---------+
+1 row in set (0.001 sec)
+
+
+MariaDB [sqltutorial]> delete from students;
+Query OK, 2 rows affected (0.041 sec)
+
+MariaDB [sqltutorial]> select * from students;
+Empty set (0.001 sec)
+
+MariaDB [sqltutorial]> desc students;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(70) | YES  |     | NULL    |       |
+| age     | int(11)     | YES  |     | NULL    |       |
+| school  | varchar(45) | YES  |     | NULL    |       |
+| address | varchar(45) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.012 sec)
+
+MariaDB [sqltutorial]> select * from students;
+Empty set (0.001 sec)
+
+MariaDB [sqltutorial]> insert into students(name,age)values('shubham',18);
+Query OK, 1 row affected (0.063 sec)
+
+MariaDB [sqltutorial]> select * from students;
++---------+------+--------+---------+
+| name    | age  | school | address |
++---------+------+--------+---------+
+| shubham |   18 | NULL   | NULL    |
++---------+------+--------+---------+
+1 row in set (0.001 sec)
+
+MariaDB [sqltutorial]> insert into students(name,age,school,address) values('aditya',17,'navyug','madangir');
+Query OK, 1 row affected (0.040 sec)
+
+MariaDB [sqltutorial]> select * from students;
++---------+------+--------+----------+
+| name    | age  | school | address  |
++---------+------+--------+----------+
+| shubham |   18 | NULL   | NULL     |
+| aditya  |   17 | navyug | madangir |
++---------+------+--------+----------+
+2 rows in set (0.001 sec)
+
+MariaDB [sqltutorial]> select name from students where name like '%bham%';
++---------+
+| name    |
++---------+
+| shubham |
++---------+
+1 row in set (0.018 sec)
+
+MariaDB [sqltutorial]> show errors;
++-------+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Level | Code | Message                                                                                                                                                   |
++-------+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Error | 1064 | You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'error' at line 1 |
++-------+------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [sqltutorial]> select age from students where age like 17;
++------+
+| age  |
++------+
+|   17 |
++------+
+1 row in set (0.001 sec)
+
+MariaDB [sqltutorial]> select * from students;
++---------+------+--------+----------+
+| name    | age  | school | address  |
++---------+------+--------+----------+
+| shubham |   18 | NULL   | NULL     |
+| aditya  |   17 | navyug | madangir |
++---------+------+--------+----------+
+2 rows in set (0.001 sec)
+
+MariaDB [sqltutorial]> select name from students;
++---------+
+| name    |
++---------+
+| shubham |
+| aditya  |
++---------+
+2 rows in set (0.001 sec)
+
+MariaDB [sqltutorial]> select address from students where address like '%ma%';
++----------+
+| address  |
++----------+
+| madangir |
++----------+
+1 row in set (0.001 sec)
+
+MariaDB [sqltutorial]> select * from students where age != 18;
++--------+------+--------+----------+
+| name   | age  | school | address  |
++--------+------+--------+----------+
+| aditya |   17 | navyug | madangir |
++--------+------+--------+----------+
+1 row in set (0.008 sec)
+
+MariaDB [sqltutorial]> Bye
+
+C:\xampp\mysql\bin>
+
+
+
+
+
+
+-------------------------------------------------------THANK YOU------------------------------------------------------------------------------
